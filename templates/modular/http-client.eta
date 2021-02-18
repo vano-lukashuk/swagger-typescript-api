@@ -78,9 +78,14 @@ export class HttpClient<SecurityDataType = unknown> {
     private addQueryParam(query: QueryParamsType, key: string) {
         const value = query[key];
 
+        if(Array.isArray(value)){
+            return value.map(el =>  encodeURIComponent(key) + "=" + encodeURIComponent(
+                typeof el === "number" ? el :
+                `${el}`
+            )).join('$');
+        }
         return (
             encodeURIComponent(key) + "=" + encodeURIComponent(
-                Array.isArray(value) ? value.join(",") :
                 typeof value === "number" ? value :
                 `${value}`
             )
