@@ -82,7 +82,7 @@ export class HttpClient<SecurityDataType = unknown> {
             return value.map(el =>  encodeURIComponent(key) + "=" + encodeURIComponent(
                 typeof el === "number" ? el :
                 `${el}`
-            )).join('$');
+            )).join('&');
         }
         return (
             encodeURIComponent(key) + "=" + encodeURIComponent(
